@@ -11,10 +11,11 @@ app.use('/', function(req, res) {
     whoami.ip = req.get('x-forwarded-for');
     whoami.lang = req.get('accept-language').split(',')[0];
     whoami.os = ua.os.name + ' ' + ua.os.version;
+    res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(whoami));
 });
 
-server.listen(8080, process.env.IP, function() {
+server.listen(process.env.PORT, process.env.IP, function() {
     var addr = server.address();
     console.log('Server is listening on port: ' + addr.port);
 })
